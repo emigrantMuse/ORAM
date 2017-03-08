@@ -10,7 +10,7 @@ import nankai.oram.common.Util;
 
 public class NewMCOSReadAndWrite {
 	
-	public static int N = 102400;
+	public static int N = 40000;
 
 	public static void main(String[] args) {  
 
@@ -26,12 +26,9 @@ public class NewMCOSReadAndWrite {
 
 	private static void testMultiWrite() {
 		//testWrite(5);
-		testWrite(10);
-		testWrite(25);
-		testWrite(50);
-		testWrite(75);
-		testWrite(100);
-		testWrite(150);
+		testWrite(10); 
+		testWrite(50); 
+		testWrite(100); 
 		testWrite(1000); 
 	}
 
@@ -80,17 +77,12 @@ public class NewMCOSReadAndWrite {
 		oram.openORAM();
 
 		Util.debug = false; 
-		
-
-		writeTheBlocks(oram, N);
-  
-  
-		accessWithRandomStatus(oram, 500);  
-		accessWithRandomStatus(oram, 1000);  
-		accessWithRandomStatus(oram, 5000);   
-		accessWithRandomStatus(oram, 10000);   
-		accessWithRandomStatus(oram, 50000);     
-		accessWithRandomStatus(oram, 100000);    
+		 
+		writeTheBlocks(oram, N); 
+   
+		accessWithRandomStatus(oram, 50); 
+		accessWithRandomStatus(oram, 100);   
+		accessWithRandomStatus(oram, 500);  	accessWithRandomStatus(oram, 1000);  
 //		
 		
 		oram.closeConnection();
@@ -122,8 +114,7 @@ public class NewMCOSReadAndWrite {
 		accessWithSameStatus(oram, 1000); 
 		//accessWithSameStatus(oram, 2500); 
 		accessWithSameStatus(oram, 5000);  
-//		accessWithSameStatus(oram, 7500); 
-		accessWithSameStatus(oram, 10000); 
+//		accessWithSameStatus(oram, 7500); 		accessWithSameStatus(oram, 10000); 
 		
 //		writeTheBlocks(oram, 10000);
 //		   
@@ -187,7 +178,7 @@ public class NewMCOSReadAndWrite {
         System.out.println("totalElapsedTime:"+totalElapsedTime);  
 //		System.out.println("-----Shuffle numeber-----!"+Util.writeNumber+"  Util.cloudtocloud:"+ Util.cloudtocloud); 
 //		System.out.println("-----ORAM CACHE-----!"+ oram.getCacheSlotSize()); 
-        System.out.println("-----writeNumber  ----  "+Util.writeNumber );
+        System.out.println("-----writeNumb r  ----  "+Util.writeNumber );
         System.out.println("-----cloudtocloud  ----  "+Util.cloudtocloud );
         System.out.println("-----readNumber  ----  "+Util.readNumber );
         System.out.println("-----bandwidth  ----  "+  Util.bandwidth  );

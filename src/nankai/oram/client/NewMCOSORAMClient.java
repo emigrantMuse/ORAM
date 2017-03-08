@@ -261,8 +261,8 @@ public class NewMCOSORAMClient implements ORAM{
 
 		if (slots[c].size() >= MCloudCommInfo.evictConditionSize)
 		{			
-//			System.out.println("evict c:"+c+" slot size:"+slots[c].size());
-			subORAMs[c].writeCloud(slots[c]);
+			if (subORAMs[c].canWrite())
+			    subORAMs[c].writeCloud(slots[c]);
 		}
 	}
 	

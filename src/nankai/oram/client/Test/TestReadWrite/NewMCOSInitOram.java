@@ -18,7 +18,7 @@ public class NewMCOSInitOram {
 		NewMCOSORAMClient oram=new NewMCOSORAMClient(); 
 
 		//initialize the client
-		oram.init(102400);
+		oram.init(40000);
 		oram.openConnection(); 
 
 		long testTime = -1; 

@@ -199,6 +199,16 @@ public class NewMCOSPartition{
 			// Second, onion decrypt by the user key
 			subOram.decryptData(data);
 		}
+		
+
+		//update all the real numbers
+		realDataNumber=0;
+		int levelBegin = (1 << (MCloudCommInfo.severBeginLevel + 1)) - 2;
+		for (int i=levelBegin; i<this.n_capacity; i++)
+		{
+			if (blockIDs[i]>0 && readFlag[i]==false)
+				realDataNumber++;
+		} 
 		return data ; 
 	}
 
@@ -353,7 +363,7 @@ public class NewMCOSPartition{
 
 		int rndLength = filledLevelLength - dataNumber - 2*evictSize; 
 		if (rndLength<0){
-			System.out.println(" rndLength "+ rndLength +" filledLevelLength "+filledLevelLength+" dataNumber "+dataNumber+" evictSize "+evictSize );
+			//System.out.println(" rndLength "+ rndLength +" filledLevelLength "+filledLevelLength+" dataNumber "+dataNumber+" evictSize "+evictSize );
 			return;
 		}
 		
@@ -541,9 +551,13 @@ public class NewMCOSPartition{
 		realDataNumber=0;
 		for (int i=levelBegin; i<this.n_capacity; i++)
 		{
-			if (blockIDs[i]>0)
+			if (blockIDs[i]>0 && readFlag[i]==false)
 				realDataNumber++;
 		}
+		
+
+		if (realDataNumber > this.n_realBlocks_p)
+			realDataNumber=realDataNumber;
 	}
 
 
@@ -632,9 +646,9 @@ public class NewMCOSPartition{
 		realDataNumber=0;
 		for (int i=levelBegin; i<this.n_capacity; i++)
 		{
-			if (blockIDs[i]>0)
+			if (blockIDs[i]>0 && readFlag[i]==false)
 				realDataNumber++;
-		}
+		} 
 	}
 	
 
@@ -696,7 +710,7 @@ public class NewMCOSPartition{
 		    }
 	    
 	    //Notice that, there is no dummy blocks
-	    //System.out.println("No dummy !!!!!! return 0!!!!!p:"+this.partition+"  !!!type:"+type+" level:"+level+" nextDummy[level]"+nextDummy[level]);
+//	    System.out.println("No dummy !!!!!! return 0!!!!!p:"+this.partition+"  !!!type:"+type+" level:"+level+" nextDummy[level]"+nextDummy[level]);
 	    return -1;
 	}
 }

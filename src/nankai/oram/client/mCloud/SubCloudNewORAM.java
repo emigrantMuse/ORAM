@@ -115,7 +115,7 @@ public class SubCloudNewORAM implements MultiCloudORAM {
 		int p = 1;//rnd.nextInt(n_partitions); 
         if (Util.debug == false){
         	p = rnd.nextInt(n_partitions);
-        	//not write to the partition with more than the pre-defined real blocks
+        	//not write to the partition with more than the pre-defined real blocks 
         	while ( partitions[p].realDataNumber >= (partitions[p].top_level_len - 2*MCloudCommInfo.evictConditionSize) )
             	p = rnd.nextInt(n_partitions);
         }
@@ -130,7 +130,18 @@ public class SubCloudNewORAM implements MultiCloudORAM {
 		
 		partitions[p].writePartition(slot, cli[cloud], otherCloud, cli[otherCloud], userKey, cloud);
 	}
-	 
+	
+	public boolean canWrite()
+	{
+		int realnumber = 0;
+		for (int i=0;i<this.n_partitions; i++)
+		{
+			realnumber += this.partitions[i].realDataNumber;
+		}
+		if (realnumber> ( (this.n_realBlocks_p * this.n_partitions * 11)/10 ) )
+			return false;
+		return true;
+	}
 
 
 	@Override
